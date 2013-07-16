@@ -27,7 +27,7 @@ inParallel a l = do
 	reduce (x,y) = (map fst x, map fst y)
 	thread v = do
 		mvar <- newEmptyMVar
-		_ <- forkIO $ do
+		forkIO $ do
 			r <- try (a v) :: IO (Either SomeException Bool)
 			case r of
 				Left _ -> putMVar mvar False
